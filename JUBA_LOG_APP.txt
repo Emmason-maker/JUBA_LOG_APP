@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Juba Seasonal Accessibility Web App</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Leaflet Routing Machine CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Leaflet Routing Machine JS -->
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+
+  <script>
+    // 1. Initialize map view over Juba, South Sudan
+    const map = L.map('map').setView([4.8517, 31.5825], 13);
+
+    // 2. Add OpenStreetMap Basemap (100% free)
+    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // 3. Add Point-to-Point Routing Control (OSRM Engine)
+    L.Routing.control({
+      waypoints: [
+        L.latLng(4.8517, 31.5825), // Origin (e.g., Juba Central Hub)
+        L.latLng(4.8800, 31.6000)  // Destination
+      ],
+      routeWhileDragging: true
+    }).addTo(map);
+  </script>
+</body>
+</html>
